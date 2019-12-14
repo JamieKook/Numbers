@@ -1,0 +1,20 @@
+.counter{
+    border-radius:50%;
+    border: thin black solid; 
+}
+body{
+    background-color: aquamarine;
+}
+
+.wood{
+    background-image: url(images/wood.jpg);
+    background-position: cover;
+}
+
+.rod{
+    position: absolute; 
+    top: 36px; 
+    z-index: -10; 
+    border: thick solid black; 
+    width: 100%; 
+}
