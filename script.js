@@ -49,12 +49,12 @@ function moveBead(direction) {
     });
     $("#spot"+moveSpot).attr("data-counter", oppDirection);
     $("#spot"+beadSpot).attr("data-counter", "false");
-    function wait(){
+    function wait(currentBead){
         let timer= setInterval(function(){
             let time=0; 
             if (time < 1) {
                 clearInterval(timer);
-                $("#spot"+beadSpot).html(""); 
+                $(currentBead).html(""); 
                 let beadImageHtml= `<img class="counter img-fluid" src="images/counter.jpeg">`;
                 $("#spot"+moveSpot).html(beadImageHtml);
                 $("#spot"+moveSpot).find(".counter").on("click", function(){
@@ -67,7 +67,7 @@ function moveBead(direction) {
             time++;
         }, 500)
     }
-    wait(); 
+    wait($("#spot"+beadSpot)); 
 }
 
 
