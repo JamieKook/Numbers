@@ -1,6 +1,8 @@
 .counter{
     border-radius:50%;
     border: thin black solid; 
+    /* position: absolute;  */
+
 }
 body{
     background-color: aquamarine;
@@ -8,7 +10,9 @@ body{
 
 .wood{
     background-image: url(images/wood.jpg);
-    background-position: cover;
+    background-size: cover;
+    height: 95px;
+    width: 80px;
 }
 
 .rod{

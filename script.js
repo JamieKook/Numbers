@@ -1,57 +1,90 @@
 let beadCount=1; 
+let isDoneFunction= false;
+let spot=null;  
+let canClick=true; 
 
-function beadChecker(status){
-    while (beadCount < 13){
-        let currentSpot= $(".beads").find("#spot"+beadCount); 
-         console.log($(currentSpot).attr("data-counter")); 
-         if($(currentSpot).attr("data-counter")===status){
-             spot=beadCount; 
-            console.log(firstUnslidSpot); 
-             return spot; 
-         }
-         beadCount++; 
-     }
+function findBead(status){
+    let currentSpot= $(".beads").find("#spot"+beadCount); 
+    console.log($(currentSpot).attr("data-counter")); 
+    if($(currentSpot).attr("data-counter")===status){
+        spot=beadCount; 
+        console.log(spot); 
+        isDoneFunction=true; 
+        return spot;
+    }
+    beadCount++; 
 }
 
-function checkForFirstUnslid(){
-    beadCount=1;
-    let firstUnslidSpot=null;  
-    beadChecker("right"); 
+function beadChecker(status, direction){
+    let spot= null; 
+    if (direction === "right")
+    {beadCount=1;
+        while (beadCount < 13 && !isDoneFunction){
+            spot= findBead(status);      
+        }
+    }  
+    isDoneFunction=false; 
+    return spot; 
 }
 
-function checkForFirstUnoccupiedSpot(){
-    beadCount=1;
-    let firstUnoccupied=null; 
-    beadChecker("false"); 
-}
-
-function slideToTheLeft(bead){
-    if (bead === checkForFirstUnslid()){
-        checkForFirstUnslid()
+function slideToTheLeft(beadSpot){
+    debugger; 
+    let x;
+    spot = beadChecker("right", "right");
+    if (beadSpot === spot && canClick){
+        canClick=false; 
+        moveSpot= beadChecker("false", "right"); 
+        console.log("#spot"+moveSpot);
+        console.log($("#spot"+moveSpot));
+        x= $("#spot"+moveSpot).offset().left;  
+        let counter= $("#spot"+beadSpot).find(".counter");
+        var xi = $(counter).offset().left;
+        $(counter).css("position", "absolute"); 
+        $(counter).animate({
+            left: (x-xi),
+        });
+        $("#spot"+moveSpot).attr("data-counter", "left");
+        $("#spot"+beadSpot).attr("data-counter", "false");
+        function wait(){
+            let timer= setInterval(function(){
+               let time=0; 
+               if (time < 1) {
+                    clearInterval(timer);
+                    $("#spot"+beadSpot).html(""); 
+                    let beadImageHtml= `<img class="counter img-fluid" src="images/counter.jpeg">`;
+                    $("#spot"+moveSpot).html(beadImageHtml);
+                    canClick=true;  
+                }
+                time++;
+            }, 500)
+        }
+        wait(); 
+        
     }
 }
 
-//How to slide from one div to another
+// function slideOneBead(beadSpot, direction){
+//     let x;
+//     spot = beadChecker(direction);
+//     if (beadSpot === spot){
+//         moveSpot= beadChecker("false"); 
+//         console.log("#spot"+moveSpot);
+//         console.log($("#spot"+moveSpot));
+//         x= $("#spot"+moveSpot).offset().left;  
+//         let counter= $("#spot"+beadSpot).find(".counter");
+//         var xi = $(counter).offset().left;
+//         $(counter).css("position", "absolute"); 
+//         $(counter).animate({
+//             left: (x-xi),
+//         });
+//         $("#spot"+moveSpot).attr("data-counter", "left");
+//         $("#spot"+beadSpot).attr("data-counter", "false");
+//     }
+// }
 
-// var x;
-// var y;
-// $('article').each(function(index){
-//     $(this).click(function(){
-//         $(this).addClass('selected') ;
-//         x = $(this).offset().left;
-//         y = $(this).offset().top;
-//     })
-//     });
 
-// $('img').each(function(index){
-//     var xi = $(this).offset().left;
-//     var yi = $(this).offset().top;
-//     $(this).css('left', xi).css('top', yi);
-//     $(this).click(function(){
-//          $(this).animate({
-//     left: x,
-//     top: y
-//          })
-//     })
-
-// });
+$(".counter").on("click", function(){
+    let beadEl = $(this).parent().attr("id"); 
+    beadSpot= parseInt(beadEl.split("ot")[1]); 
+    slideToTheLeft(beadSpot); 
+}); 
