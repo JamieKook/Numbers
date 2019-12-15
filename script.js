@@ -42,7 +42,7 @@ function moveBead(direction) {
     moveSpot= beadChecker("false", direction); 
     x= $("#spot"+moveSpot).offset().left;  
     let counter= $("#spot"+beadSpot).find(".counter");
-    var xi = $(counter).offset().left;
+    let xi = $(counter).offset().left;
     $(counter).css("position", "absolute"); 
     $(counter).animate({
         left: (x-xi),
@@ -60,7 +60,9 @@ function moveBead(direction) {
                 $("#spot"+moveSpot).find(".counter").on("click", function(){
                     let beadEl = $(this).parent().attr("id"); 
                     beadSpot= parseInt(beadEl.split("ot")[1]); 
-                    slideBead(beadSpot); 
+                    slideBead(beadSpot);
+                    displayCount(); 
+                    // slideAllBeads();  
                 }); 
                 canClick=true;  
             }
@@ -71,8 +73,7 @@ function moveBead(direction) {
 }
 
 
-function slideBead(beadSpot){
-    debugger; 
+function slideBead(beadSpot){ 
     let x;
     spot = beadChecker("right", "right");
     if (beadSpot === spot && canClick){
@@ -85,9 +86,81 @@ function slideBead(beadSpot){
     }
 }
 
+function displayCount(){
+    count= beadChecker("left", "left")
+    if (count === undefined){
+        $("#count").text(0); 
+    } else {
+        $("#count").text(count); 
+    }
+    
+}
+
+// function slideAllBeads(){
+//     debugger; 
+//     count= beadChecker("left", "left")
+//     if (count === 10){
+//         let newButton=$("<button>"); 
+//         newButton.addClass("btn btn-secondary"); 
+//         newButton.text("Yes"); 
+//         $(newButton).on("click",function(){
+//             let x= $("#spot10").offset().left;  
+//             let xi = $("#spot12").offset().left;
+//             $(".counter").animate({
+//                 left: (x-xi),
+//             });
+//         }); 
+//         $(".question").append(newButton); 
+//         $(".question").removeAttr("hidden"); 
+//         $(".question").show();
+//     } else {
+//         $(".question").hide(); 
+//         $(".question").find("button").remove(); 
+//     }
+// }
 
 $(".counter").on("click", function(){
     let beadEl = $(this).parent().attr("id"); 
     beadSpot= parseInt(beadEl.split("ot")[1]); 
-    slideBead(beadSpot); 
+    slideBead(beadSpot);
+    displayCount(); 
+    // slideAllBeads(); 
+}); 
+
+$("#slideAll").on("click", function(){
+    debugger; 
+    let counters= $(".counter");  
+    // let x= $("#spot10").offset().left;  
+    // let xi = $("#spot12").offset().left;
+    let i=9;  
+    let timer= setInterval(function(){
+        if (i>-1){
+            let counter= counters[i]; 
+            $(counter).css("position", "absolute");
+            let x= $("#spot"+(i+1)).offset().left;  
+            let xi = $("#spot"+ (i+3)).offset().left;
+            $(counter).animate({
+                right: (x-xi)
+            }, 50);
+        }
+       if (i<9 && i >-2){
+           $("#spot"+(i+2)).html(""); 
+           $("#spot"+(i+2)).attr("data-counter", "false"); 
+           let beadImageHtml= `<img class="counter img-fluid" src="images/counter.jpeg">`;
+           $("#spot"+(i+4)).html(beadImageHtml);
+           //change direction to opposite direction
+           $("#spot"+(i+4)).attr("data-counter", "right");
+           $("#spot"+(i+4)).find(".counter").on("click", function(){
+               debugger;
+               let beadEl = $(this).parent().attr("id"); 
+               beadSpot= parseInt(beadEl.split("ot")[1]); 
+               slideBead(beadSpot);
+               displayCount(); 
+           }); 
+       } 
+        if (i< -3){
+            clearInterval; 
+        }
+        i--; 
+    }, 100); 
 }); 

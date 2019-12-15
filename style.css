@@ -1,9 +1,8 @@
 .counter{
     border-radius:50%;
     border: thin black solid; 
-    /* position: absolute;  */
-
 }
+
 body{
     background-color: aquamarine;
 }
@@ -17,8 +16,19 @@ body{
 
 .rod{
     position: absolute; 
-    top: 36px; 
     z-index: -10; 
     border: thick solid black; 
     width: 100%; 
+    height: 1px; 
+    background-color: black; 
+}
+
+.beads{
+    display: flex; 
+    align-items: center;
+}
+
+#abacus {
+    min-width: 375px; 
+    overflow: scroll; 
 }
