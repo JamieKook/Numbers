@@ -4,7 +4,9 @@
 }
 
 body{
-    background-color: aquamarine;
+    background-image: url(images/pinkBackdrop.jpg);
+    background-size: cover; 
+    background-repeat: no-repeat;
 }
 
 .wood{
@@ -23,12 +25,31 @@ body{
     background-color: black; 
 }
 
+
 .beads{
     display: flex; 
     align-items: center;
+    z-index: 30; 
 }
 
 #abacus {
     min-width: 375px; 
     overflow: scroll; 
+}
+
+#count {
+    font-size: 6rem; 
+}
+
+.countStar {
+    width: 50px; 
+}
+
+.star{
+    background-color: #f4f4f4; 
+    border: thick goldenrod solid; 
+}
+
+.top{
+    background-color: #f4f4f4;
 }

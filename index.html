@@ -10,42 +10,65 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-    <div class="container my-5" id="abacus">
-        <div class="row ones">
-            <div class="col-1 wood">
-            </div>
-            <div class="col-10 beads">
-                <div id="beadrow" class="row">
-                        <div id="spot1" class="col-1 p-0" data-counter="false"></div>
-                        <div id="spot2" class="col-1 p-0" data-counter="false"></div>
-                        <div id="spot3" class="col-1 p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
-                        <div id="spot4" class="col-1  p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
-                        <div id="spot5" class="col-1 p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
-                        <div id="spot6" class="col-1 p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
-                        <div id="spot7" class="col-1 p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
-                        <div id="spot8" class="col-1 p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
-                        <div id="spot9" class="col-1 p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
-                        <div id="spot10" class="col-1 p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
-                        <div id="spot11" class="col-1 p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
-                        <div id="spot12" class="col-1 p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
-                </div>
-                <div class="row rod border-top border-dark">
-                </div>
-            </div>
-            <div class="col-1 wood">
-            </div>
-           
-        </div>
-    </div>
 
-    <div class= "container count text-center">
-        <h1 id="count">0</h1>
-        <div class="question">
-            <h3>Slide all beads?</h3>
-            <button id="slideAll" class="btn btn-secondary">Yes</button>
-        </div>
-        
+    <div class= "top container my-5">
+            <div class="container my-4 text-center" id="introQuestion">
+                    <h1>How many big yellow stars are there?</h1>
+                </div>
+            
+                <div class= "abacusAndCounter row">
+                    <div class= "col-md-2 container count text-center d-flex align-items-center justify-content-center">
+                        <h1 id="count">0</h1>
+                    </div>
+                    <div class="col-md-9 container my-5" id="abacus">
+                        <div class="row ones">
+                            <div class="col-1 wood">
+                            </div>
+                            <div class="col-10 beads">
+                                <div id="beadrow" class="row">
+                                        <div id="spot1" class="col-1 p-0" data-counter="false"></div>
+                                        <div id="spot2" class="col-1 p-0" data-counter="false"></div>
+                                        <div id="spot3" class="col-1 p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
+                                        <div id="spot4" class="col-1  p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
+                                        <div id="spot5" class="col-1 p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
+                                        <div id="spot6" class="col-1 p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
+                                        <div id="spot7" class="col-1 p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
+                                        <div id="spot8" class="col-1 p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
+                                        <div id="spot9" class="col-1 p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
+                                        <div id="spot10" class="col-1 p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
+                                        <div id="spot11" class="col-1 p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
+                                        <div id="spot12" class="col-1 p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
+                                </div>
+                                <div class="row rod border-top border-dark">
+                                </div>
+                            </div>
+                            <div class="col-1 wood">
+                            </div>
+                        </div>
+                        <div class="question d-flex justify-content-between mx-5 text-center">
+                            <div class=slideQuestion>
+                                <h3>Slide all beads over?</h3>
+                                <button id="slideOver" class="btn btn-secondary">Yes</button>
+                            </div>
+                            <div class=slideQuestion>
+                                <h3>Reset beads?</h3>
+                                <button id="slideReset" class="btn btn-secondary">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
     </div>
+    
+
+    <div class="star container p-5 my-5 d-flex justify-content-around">
+        <img class="countStar img-fluid" src="images/star.jpeg">
+        <img class="countStar img-fluid" src="images/star.jpeg">
+        <img class="countStar img-fluid" src="images/star.jpeg">
+        <img class="countStar img-fluid" src="images/star.jpeg">
+    </div>
+   
+
+   
 </body>
 <script src="script.js" type="text/javascript"></script>
 </html>
