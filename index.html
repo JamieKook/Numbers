@@ -7,18 +7,23 @@
     <title>Numbers</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css" type="text/css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
 
     <div class= "top container my-5">
-            <div class="container my-4 text-center" id="introQuestion">
-                    <h1>How many big yellow stars are there?</h1>
+            <div class="container my-4 p-5 text-center" id="introQuestion">
+                <h1>Count the yellow stars with the abacus!</h1>
+                        <!-- Button trigger modal -->
+                <button id="instructionsBtn" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#instructions">
+                    View the Instructions
+                </button>
+        
                 </div>
             
                 <div class= "abacusAndCounter row">
-                    <div class= "col-md-2 container count text-center d-flex align-items-center justify-content-center">
+                    <div class= "col-md-2 container count text-center d-flex flex-column align-items-center justify-content-center">
                         <h1 id="count">0</h1>
+                        <button id="gradeBtn" class="btn btn-secondary" type="button" data-toggle="modal" data-target="#gradeCorrect">Check my answer</button>
                     </div>
                     <div class="col-md-9 container my-5" id="abacus">
                         <div class="row ones">
@@ -61,14 +66,60 @@
     
 
     <div class="star container p-5 my-5 d-flex justify-content-around">
-        <img class="countStar img-fluid" src="images/star.jpeg">
-        <img class="countStar img-fluid" src="images/star.jpeg">
-        <img class="countStar img-fluid" src="images/star.jpeg">
-        <img class="countStar img-fluid" src="images/star.jpeg">
+
     </div>
    
+    <!-- Instructions Modal -->
+    <div class="modal fade" id="instructions" tabindex="-1" role="dialog" aria-labelledby="instructionsTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="instructionsTitle">Instructions</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body text-center">
+            Click on the yellow abacus beads to slide them. <br><br>
+            Each yellow bead is 1. <br><br>
+            Slide over the same number of beads as there are stars. <br><br>
+            Click "Check my answer" when you are done. 
+            </div>
+            <div class="modal-footer">
+            <button id="start" type="button" class="btn btn-secondary" data-dismiss="modal">Start</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Grade Modal -->
+    <div class="modal fade" id="gradeCorrect" tabindex="-1" role="dialog" aria-labelledby="gradeCorrectTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="gradeCorrectTitle">Congratulations</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body text-center">
+                You are right!
+                <br> <br>
+                Good job. 
+                </div>
+                <div class="modal-footer">
+                <button id="tryAgain" type="button" class="btn btn-secondary" data-dismiss="modal">Try a new count</button>
+                <button id="goBack" type="button" class="btn btn-secondary" data-dismiss="modal">Go Back</button>
+                </div>
+            </div>
+            </div>
+        </div>
 
    
 </body>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="script.js" type="text/javascript"></script>
 </html>

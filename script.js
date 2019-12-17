@@ -2,6 +2,7 @@ let beadCount=1;
 let isDoneFunction= false;
 let spot=null;  
 let canClick=true; 
+let numberStars;
 
 //Find a bead given a status- left, right, false
 function findBead(status){
@@ -119,7 +120,6 @@ function initialClickAssignments(){
 
 function giveClickListenerToBeadCounters(counter){
     $(counter).on("click", function(){
-        debugger;
         let beadEl = $(this).parent().attr("id"); 
         beadSpot= parseInt(beadEl.split("ot")[1]); 
         decideSlideBead(beadSpot);
@@ -169,7 +169,6 @@ function moveBeadHTML(from, to, status){
 } 
 
 function moveAllBeadsLeft(){
-    debugger; 
     let startSpot=beadChecker("right", "right"); 
     let i= startSpot-3;  
     function leftWaitTimer(){
@@ -191,8 +190,40 @@ function moveAllBeadsLeft(){
     leftWaitTimer(); 
     $("#count").text(10);   
 }
+function generateStars(){
+    $(".star").empty(); 
+    let stars=  '<img class="countStar img-fluid" src="images/star.jpeg"></img>';
+    numberStars= Math.ceil(Math.random()*10); 
+    let count=0; 
+    while (count < numberStars){
+        let starEl=$(stars); 
+        $(".star").append(starEl); 
+        count++; 
+    }
+}
+
+function checkMyAnswer(){
+    debugger; 
+    if (numberStars === spot){
+        $("#gradeCorrect").find($("#gradeCorrectTitle")).text("Congratulations"); 
+        $("#gradeCorrect").find($(".modal-body")).html(" You are right!<br> <br>Good job."); 
+        
+    } else {
+        $("#gradeCorrect").find($("#gradeCorrectTitle")).text("On No!"); 
+        $("#gradeCorrect").find($(".modal-body")).html("Your count is not right<br> <br>Make sure the number of beads is the same as the number of stars.");  
+    }
+}
 
 $("#slideOver").on("click", moveAllBeadsLeft); 
 $("#slideReset").on("click", resetBeadsRight); 
+// $("#start").on("click", generateStars); 
+$("#gradeBtn").on("click", checkMyAnswer); 
+$("#instructionsBtn").on("click", $("#instructions").show());
+$("#tryAgain").on("click", function(){
+    generateStars();
+    resetBeadsRight(); 
+}) 
 
-initialClickAssignments(); 
+$("#instructions").hide(); 
+initialClickAssignments();
+generateStars();  
