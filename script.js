@@ -210,10 +210,12 @@ function checkMyAnswer(){
     if (numberStars === spot){
         $("#gradeCorrect").find($("#gradeCorrectTitle")).text("Congratulations"); 
         $("#gradeCorrect").find($(".modal-body")).html(" You are right!<br> <br>Good job."); 
-        
+        answerSound("correct");
+
     } else {
         $("#gradeCorrect").find($("#gradeCorrectTitle")).text("On No!"); 
-        $("#gradeCorrect").find($(".modal-body")).html("Your count is not right<br> <br>Make sure the number of beads is the same as the number of stars.");  
+        $("#gradeCorrect").find($(".modal-body")).html("Your count is not right<br> <br>Make sure the number of beads is the same as the number of stars.");
+        answerSound("incorrect");  
     }
 }
 
@@ -225,6 +227,12 @@ function makeSoundFiles(){
         $(newAudio).attr("id", "audio"+i);
         $("body").append(newAudio); 
     }   
+}
+
+
+function answerSound(answer){
+    let audio = document.getElementById(answer+"audio");
+    audio.play();
 }
 
 function countAloud(number){
