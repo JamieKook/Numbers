@@ -78,18 +78,21 @@ function decideSlideBead(beadSpot){
 
 // show the bead count on the page
 function displayCount(){
+    
     count= beadChecker("left", "left")
+    console.log(count); 
     if (count === undefined){
         $("#count").text(0); 
+        countAloud(0); 
     } else {
         $("#count").text(count); 
+        countAloud(count); 
     }
     
 }
 
 //Reveal button to slide all beads over
 // function askToSlideAll(){
-//     debugger; 
 //     count= beadChecker("left", "left")
 //     if (count === 10){
 //         let newButton=$("<button>"); 
@@ -185,7 +188,7 @@ function moveAllBeadsLeft(){
                 clearInterval; 
             }
             i++; 
-        }, 100); 
+        }, 150); 
     }
     leftWaitTimer(); 
     $("#count").text(10);   
@@ -214,6 +217,22 @@ function checkMyAnswer(){
     }
 }
 
+function makeSoundFiles(){
+    let audioFile = $("#audio0"); 
+    for (let i=1; i<11; i++){
+        let newAudio = $(audioFile).clone();
+        $(newAudio).attr("src", ("audio/child"+i+".ogg")); 
+        $(newAudio).attr("id", "audio"+i);
+        $("body").append(newAudio); 
+    }   
+}
+
+function countAloud(number){
+    let audio = document.getElementById("audio"+number);
+    console.log(audio); 
+    audio.play();
+}
+
 $("#slideOver").on("click", moveAllBeadsLeft); 
 $("#slideReset").on("click", resetBeadsRight); 
 // $("#start").on("click", generateStars); 
@@ -226,4 +245,5 @@ $("#tryAgain").on("click", function(){
 
 $("#instructions").hide(); 
 initialClickAssignments();
-generateStars();  
+generateStars(); 
+makeSoundFiles();  
