@@ -21,28 +21,24 @@
                 </div>
             
                 <div class= "abacusAndCounter row">
-                    <div class= "col-md-2 container count text-center d-flex flex-column align-items-center justify-content-center">
-                        <h1 id="count">0</h1>
-                        <button id="gradeBtn" class="btn btn-secondary" type="button" data-toggle="modal" data-target="#gradeCorrect">Check my answer</button>
-                    </div>
                     <div class="col-md-9 container my-5" id="abacus">
                         <div class="row ones">
                             <div class="col-1 wood">
                             </div>
                             <div class="col-10 beads">
                                 <div id="beadrow" class="row">
-                                        <div id="spot1" class="col-1 p-0" data-counter="false"></div>
+                                        <div id="spot12" class="col-1 p-0" data-counter="left"><img class="counter img-fluid" src="images/counter.jpeg"></div>
+                                        <div id="spot11" class="col-1 p-0" data-counter="left"><img class="counter img-fluid" src="images/counter.jpeg"></div>
+                                        <div id="spot10" class="col-1 p-0" data-counter="left"><img class="counter img-fluid" src="images/counter.jpeg"></div>
+                                        <div id="spot9" class="col-1  p-0" data-counter="left"><img class="counter img-fluid" src="images/counter.jpeg"></div>
+                                        <div id="spot8" class="col-1 p-0" data-counter="left"><img class="counter img-fluid" src="images/counter.jpeg"></div>
+                                        <div id="spot7" class="col-1 p-0" data-counter="left"><img class="counter img-fluid" src="images/counter.jpeg"></div>
+                                        <div id="spot6" class="col-1 p-0" data-counter="left"><img class="counter img-fluid" src="images/counter.jpeg"></div>
+                                        <div id="spot5" class="col-1 p-0" data-counter="left"><img class="counter img-fluid" src="images/counter.jpeg"></div>
+                                        <div id="spot4" class="col-1 p-0" data-counter="left"><img class="counter img-fluid" src="images/counter.jpeg"></div>
+                                        <div id="spot3" class="col-1 p-0" data-counter="left"><img class="counter img-fluid" src="images/counter.jpeg"></div>
                                         <div id="spot2" class="col-1 p-0" data-counter="false"></div>
-                                        <div id="spot3" class="col-1 p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
-                                        <div id="spot4" class="col-1  p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
-                                        <div id="spot5" class="col-1 p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
-                                        <div id="spot6" class="col-1 p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
-                                        <div id="spot7" class="col-1 p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
-                                        <div id="spot8" class="col-1 p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
-                                        <div id="spot9" class="col-1 p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
-                                        <div id="spot10" class="col-1 p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
-                                        <div id="spot11" class="col-1 p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
-                                        <div id="spot12" class="col-1 p-0" data-counter="right"><img class="counter img-fluid" src="images/counter.jpeg"></div>
+                                        <div id="spot1" class="col-1 p-0" data-counter="false"></div>
                                 </div>
                                 <div class="row rod border-top border-dark">
                                 </div>
@@ -52,20 +48,24 @@
                         </div>
                         <div class="question d-flex justify-content-between mx-5 text-center">
                             <div class=slideQuestion>
-                                <h3>Slide all beads over?</h3>
-                                <button id="slideOver" class="btn btn-secondary">Yes</button>
+                                <h3>Slide all beads left?</h3>
+                                <button id="slideLeft" class="btn btn-secondary">Yes</button>
                             </div>
                             <div class=slideQuestion>
-                                <h3>Reset beads?</h3>
-                                <button id="slideReset" class="btn btn-secondary">Yes</button>
+                                <h3>Slide all beads right?</h3>
+                                <button id="slideRight" class="btn btn-secondary">Yes</button>
                             </div>
                         </div>
+                    </div>
+                    <div class= "col-md-2 container count text-center d-flex flex-column align-items-center justify-content-center">
+                        <h1 id="count">0</h1>
+                        <button id="gradeBtn" class="btn btn-secondary my-2" type="button" data-toggle="modal" data-target="#gradeCorrect">Check my answer</button>
                     </div>
                 </div>
     </div>
     
 
-    <div class="star container p-5 my-5 d-flex justify-content-around">
+    <div class="star container p-5 my-5 d-flex flex-wrap justify-content-around">
 
     </div>
    
