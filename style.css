@@ -48,8 +48,11 @@ body{
 .star{
     background-color: #f4f4f4; 
     border: thick goldenrod solid; 
+    overflow: scroll; 
 }
 
 .top{
     background-color: #f4f4f4;
+    min-width: 375px; 
+    overflow: scroll; 
 }

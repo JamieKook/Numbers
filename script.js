@@ -137,8 +137,8 @@ function moveAllBeadsLeft(){
     let i=startSpot-1; 
     function leftWaitTimer(){let timer= setInterval(function(){
         if (i>-1){
-            let counters= $(".counter"); 
-            let counter= $(counters).find("#spot"+(i+1));
+            let counter= $("#beadrow").find("#spot"+(i+3)).find(".counter");
+            console.log(counter); 
             animateBead((i+1), (i+3), counter); 
         }
        if (i<9 && i >-2){
@@ -179,12 +179,12 @@ function moveAllBeadsRight(){
     debugger; 
     let startSpot=beadChecker("left", "left"); 
     let i= startSpot-3;  
-    spot=10;
+    spot=13;
     function rightWaitTimer(){
         let timer= setInterval(function(){
             if (i<10){
-                let counters= $(".counter"); 
-                let counter= $(counters).find("#spot"+(i+3));
+                let counter= $("#beadrow").find("#spot"+(i+3)).find(".counter");
+                console.log(counter); 
                 animateBead((i+3), (i+1), counter); 
             }
            if (i>0 && i <11){
@@ -195,6 +195,7 @@ function moveAllBeadsRight(){
             }
             i++; 
         }, 100); 
+        spot=13; 
     }
     rightWaitTimer(); 
     $("#count").text(10);
@@ -257,7 +258,7 @@ $("#gradeBtn").on("click", checkMyAnswer);
 $("#instructionsBtn").on("click", $("#instructions").show());
 $("#tryAgain").on("click", function(){
     generateStars();
-    moveAllBeadsRight(); 
+    moveAllBeadsLeft(); 
 }) 
 
 $("#instructions").hide(); 
