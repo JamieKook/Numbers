@@ -17,13 +17,13 @@ function findBead(status){
 //  Look for the first bead with status left, right, or flase
 function beadChecker(status, direction){
     let spot= null; 
-    if (direction === "right"){
+    if (direction === "left"){
         beadCount=1;
         while (beadCount < 13 && !isDoneFunction){
             spot= findBead(status);
             beadCount++;       
         }
-    } else if (direction === "left"){
+    } else if (direction === "right"){
         beadCount=12;
         while (beadCount > 0 && !isDoneFunction){
             spot= findBead(status); 
@@ -36,6 +36,7 @@ function beadChecker(status, direction){
 
 //move a bead in a given direction - left or right
 function moveBead(direction) {
+    debugger; 
     let oppDirection= null; 
     if (direction === "right"){
         oppDirection= "left"; 
@@ -85,8 +86,8 @@ function displayCount(){
         $("#count").text(0); 
         countAloud(0); 
     } else {
-        $("#count").text(count); 
-        countAloud(count); 
+        $("#count").text(count-3); 
+        countAloud(count-3); 
     }
     
 }
@@ -123,6 +124,7 @@ function initialClickAssignments(){
 
 function giveClickListenerToBeadCounters(counter){
     $(counter).on("click", function(){
+        debugger; 
         let beadEl = $(this).parent().attr("id"); 
         beadSpot= parseInt(beadEl.split("ot")[1]); 
         decideSlideBead(beadSpot);
@@ -130,17 +132,17 @@ function giveClickListenerToBeadCounters(counter){
 }
 
 //slides all left beads to the right
-function resetBeadsRight(){
-    let startSpot=beadChecker("left", "left");  
+function moveAllBeadsLeft(){
+    let startSpot=beadChecker("right", "right");  
     let i=startSpot-1; 
-    function rightWaitTimer(){let timer= setInterval(function(){
+    function leftWaitTimer(){let timer= setInterval(function(){
         if (i>-1){
             let counters= $(".counter"); 
-            let counter= counters[i]; 
+            let counter= $(counters).find("#spot"+(i+1));
             animateBead((i+1), (i+3), counter); 
         }
        if (i<9 && i >-2){
-            moveBeadHTML((i+2), (i+4), "right");
+            moveBeadHTML((i+2), (i+4), "left");
        }
         if(i< -3){
             clearInterval; 
@@ -148,9 +150,11 @@ function resetBeadsRight(){
         i--; 
     }, 100); 
     } 
-    rightWaitTimer(); 
+    leftWaitTimer(); 
     
-    $("#count").text(0);   
+    $("#count").text(0); 
+    countAloud(0);
+    spot=0;    
 }
 
 function animateBead(from, to, counter){
@@ -171,27 +175,32 @@ function moveBeadHTML(from, to, status){
     giveClickListenerToBeadCounters($("#spot"+to).find(".counter"));
 } 
 
-function moveAllBeadsLeft(){
-    let startSpot=beadChecker("right", "right"); 
+function moveAllBeadsRight(){
+    debugger; 
+    let startSpot=beadChecker("left", "left"); 
     let i= startSpot-3;  
-    function leftWaitTimer(){
+    spot=10;
+    function rightWaitTimer(){
         let timer= setInterval(function(){
             if (i<10){
                 let counters= $(".counter"); 
-                let counter= counters[i]; 
+                let counter= $(counters).find("#spot"+(i+3));
                 animateBead((i+3), (i+1), counter); 
             }
            if (i>0 && i <11){
-                moveBeadHTML((i+2), (i), "left"); 
+                moveBeadHTML((i+2), (i), "right"); 
            }
             if(i> 12){
                 clearInterval; 
             }
             i++; 
-        }, 150); 
+        }, 100); 
     }
-    leftWaitTimer(); 
-    $("#count").text(10);   
+    rightWaitTimer(); 
+    $("#count").text(10);
+    countAloud(10); 
+     
+
 }
 function generateStars(){
     $(".star").empty(); 
@@ -207,7 +216,7 @@ function generateStars(){
 
 function checkMyAnswer(){
     debugger; 
-    if (numberStars === spot){
+    if (numberStars === (spot-3)){
         $("#gradeCorrect").find($("#gradeCorrectTitle")).text("Congratulations"); 
         $("#gradeCorrect").find($(".modal-body")).html(" You are right!<br> <br>Good job."); 
         answerSound("correct");
@@ -241,14 +250,14 @@ function countAloud(number){
     audio.play();
 }
 
-$("#slideOver").on("click", moveAllBeadsLeft); 
-$("#slideReset").on("click", resetBeadsRight); 
+$("#slideLeft").on("click", moveAllBeadsLeft); 
+$("#slideRight").on("click", moveAllBeadsRight); 
 // $("#start").on("click", generateStars); 
 $("#gradeBtn").on("click", checkMyAnswer); 
 $("#instructionsBtn").on("click", $("#instructions").show());
 $("#tryAgain").on("click", function(){
     generateStars();
-    resetBeadsRight(); 
+    moveAllBeadsRight(); 
 }) 
 
 $("#instructions").hide(); 
