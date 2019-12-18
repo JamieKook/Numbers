@@ -3,7 +3,10 @@ let isDoneFunction= false;
 let spot=null;  
 let canClick=true; 
 let numberStars;
+let isCorrect=false; 
+let isCounting=true; 
 
+//abacus- ones 
 //Find a bead given a status- left, right, false
 function findBead(status){
     let currentSpot= $(".beads").find("#spot"+beadCount); 
@@ -77,44 +80,9 @@ function decideSlideBead(beadSpot){
     }
 }
 
-// show the bead count on the page
-function displayCount(){
-    
-    count= beadChecker("left", "left")
-    console.log(count); 
-    if (count === undefined){
-        $("#count").text(0); 
-        countAloud(0); 
-    } else {
-        $("#count").text(count-3); 
-        countAloud(count-3); 
-    }
-    
-}
 
-//Reveal button to slide all beads over
-// function askToSlideAll(){
-//     count= beadChecker("left", "left")
-//     if (count === 10){
-//         let newButton=$("<button>"); 
-//         newButton.addClass("btn btn-secondary"); 
-//         newButton.text("Yes"); 
-//         $(newButton).on("click",function(){
-//             let x= $("#spot10").offset().left;  
-//             let xi = $("#spot12").offset().left;
-//             $(".counter").animate({
-//                 left: (x-xi),
-//             });
-//         }); 
-//         $(".question").append(newButton); 
-//         $(".question").removeAttr("hidden"); 
-//         $(".question").show();
-//     } else {
-//         $(".question").hide(); 
-//         $(".question").find("button").remove(); 
-//     }
-// }
 
+//give clickListeners to beads at load
 function initialClickAssignments(){
     let counters= $(".counter"); 
     for (let i=0; i<counters.length; i++){
@@ -122,6 +90,7 @@ function initialClickAssignments(){
     }
 }
 
+//function to move beads on click 
 function giveClickListenerToBeadCounters(counter){
     $(counter).on("click", function(){
         debugger; 
@@ -131,7 +100,7 @@ function giveClickListenerToBeadCounters(counter){
     }); 
 }
 
-//slides all left beads to the right
+//slides all beads to the left
 function moveAllBeadsLeft(){
     let startSpot=beadChecker("right", "right");  
     let i=startSpot-1; 
@@ -157,6 +126,7 @@ function moveAllBeadsLeft(){
     spot=0;    
 }
 
+//the actual animation of the bead movement
 function animateBead(from, to, counter){
     $(counter).css("position", "absolute");
     let x= $("#spot"+from).offset().left;  
@@ -166,6 +136,7 @@ function animateBead(from, to, counter){
     }, 50);
 }  
 
+//moving the bead html 
 function moveBeadHTML(from, to, status){
     $("#spot"+from).html(""); 
     $("#spot"+from).attr("data-counter", "false"); 
@@ -175,6 +146,7 @@ function moveBeadHTML(from, to, status){
     giveClickListenerToBeadCounters($("#spot"+to).find(".counter"));
 } 
 
+//move all beads to the right
 function moveAllBeadsRight(){
     debugger; 
     let startSpot=beadChecker("left", "left"); 
@@ -200,9 +172,29 @@ function moveAllBeadsRight(){
     rightWaitTimer(); 
     $("#count").text(10);
     countAloud(10); 
-     
+}
+
+// show the bead count on the page
+function displayCount(){
+    if (isCounting){
+        count= beadChecker("left", "left")
+        console.log(count); 
+        if (count === undefined){
+            $("#count").text(0); 
+            countAloud(0); 
+        } else {
+            $("#count").text(count-3); 
+            countAloud(count-3); 
+        }
+    } else {
+        $("#count").text(""); 
+    }
 
 }
+
+//star game code 
+
+//randomly generate 1-10 stars
 function generateStars(){
     $(".star").empty(); 
     let stars=  '<img class="countStar img-fluid" src="images/star.jpeg"></img>';
@@ -215,20 +207,42 @@ function generateStars(){
     }
 }
 
+function collectStars(){
+    let stars= $(".countStar"); 
+    for (let i=0; i<stars.length; i++){
+        $(stars[i]).addClass("animated rotateOut"); 
+    }
+}; 
+
+//check answer if it matches star number
 function checkMyAnswer(){
-    debugger; 
     if (numberStars === (spot-3)){
+        isCorrect=true; 
+        collectStars();
         $("#gradeCorrect").find($("#gradeCorrectTitle")).text("Congratulations"); 
         $("#gradeCorrect").find($(".modal-body")).html(" You are right!<br> <br>Good job."); 
         answerSound("correct");
-
+        $("#gradeCorrect").find($(".results")).attr("id", "tryAgain");
+        $("#gradeCorrect").find($(".results")).text("Play Again!");
+        $("#gradeCorrect").find($(".results")).on("click", function(){
+            debugger; 
+            if (isCorrect){
+                generateStars();
+                moveAllBeadsLeft();
+            }
+        });  
     } else {
+        debugger; 
+        isCorrect=false; 
         $("#gradeCorrect").find($("#gradeCorrectTitle")).text("On No!"); 
         $("#gradeCorrect").find($(".modal-body")).html("Your count is not right<br> <br>Make sure the number of beads is the same as the number of stars.");
-        answerSound("incorrect");  
+        answerSound("incorrect"); 
+        $("#gradeCorrect").find($(".results")).attr("id", "goBack");
+        $("#gradeCorrect").find($(".results")).text("Let me try again!"); 
     }
 }
 
+//create html sound files
 function makeSoundFiles(){
     let audioFile = $("#audio0"); 
     for (let i=1; i<11; i++){
@@ -239,27 +253,43 @@ function makeSoundFiles(){
     }   
 }
 
-
+//play in/correct answer
 function answerSound(answer){
     let audio = document.getElementById(answer+"audio");
     audio.play();
 }
 
+//play number audio files
 function countAloud(number){
-    let audio = document.getElementById("audio"+number);
-    console.log(audio); 
-    audio.play();
+    if(isCounting){
+        let audio = document.getElementById("audio"+number);
+        console.log(audio); 
+        audio.play();
+    }
 }
 
+//turn off numbers and audio count
+function turnOnOffCount(){
+    debugger; 
+    if (isCounting){
+        isCounting=false; 
+    } else {
+        isCounting=true; 
+    }
+}; 
+
+
+//event listeners
 $("#slideLeft").on("click", moveAllBeadsLeft); 
 $("#slideRight").on("click", moveAllBeadsRight); 
 // $("#start").on("click", generateStars); 
 $("#gradeBtn").on("click", checkMyAnswer); 
 $("#instructionsBtn").on("click", $("#instructions").show());
-$("#tryAgain").on("click", function(){
-    generateStars();
-    moveAllBeadsLeft(); 
-}) 
+$("#switch").on("click", function(){
+    turnOnOffCount();
+    displayCount(); 
+}); 
+
 
 $("#instructions").hide(); 
 initialClickAssignments();
