@@ -11,9 +11,10 @@ body{
 
 .wood{
     background-image: url(images/wood.jpg);
-    background-size: cover;
-    height: 95px;
-    width: 80px;
+    background-size: cover; 
+    background-repeat: no-repeat;
+    height: 95px; 
+    max-width: 50px;
 }
 
 .rod{
@@ -38,7 +39,7 @@ body{
 }
 
 #count {
-    font-size: 6rem; 
+    font-size: 5rem; 
 }
 
 .countStar {

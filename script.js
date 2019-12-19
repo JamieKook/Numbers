@@ -275,6 +275,16 @@ function turnOnOffCount(){
     }
 }; 
 
+// Future use
+// function generateRandomNum(){
+//     $(".star").empty(); 
+//     let numberEl=  $("<h1>"); 
+//     let number= Math.ceil(Math.random()*10); 
+//     let count=0; 
+//     numberEl.text(number); 
+//     numberEl.addClass("count"); 
+//     $(".star").append(numberEl); 
+// }
 
 //event listeners
 $("#slideLeft").on("click", moveAllBeadsLeft); 
@@ -283,7 +293,6 @@ $("#slideRight").on("click", moveAllBeadsRight);
 $("#gradeBtn").on("click", checkMyAnswer); 
 $("#instructionsBtn").on("click", $("#instructions").show());
 $(".slider").on("click", function(){
-    debugger; 
     turnOnOffCount();
     displayCount(); 
 }); 
