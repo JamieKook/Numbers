@@ -11,10 +11,10 @@ const apiKey="G3W8GJRNbqbWGkFCS9Hd3c3iV4CtuQt8";
 //Userinput stuff
 let userObject= JSON.parse(localStorage.getItem("user")); 
 const {counter} = userObject; 
-const {favoriteAnimal} = userObject; 
+let {favoriteAnimal} = userObject; 
 const {color} = userObject; 
 let giphyCount=1; 
-if (favoriteAnimal === null){
+if (favoriteAnimal === ""){
     favoriteAnimal= "celebrate"; 
 }
 
