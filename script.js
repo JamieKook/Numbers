@@ -14,6 +14,9 @@ const {counter} = userObject;
 const {favoriteAnimal} = userObject; 
 const {color} = userObject; 
 let giphyCount=1; 
+if (favoriteAnimal === null){
+    favoriteAnimal= "celebrate"; 
+}
 
 if (color !== null){
     $("body").css("background-image", `url(images/Backdrop/${color.toLowerCase()}Backdrop.jpg)`); 
