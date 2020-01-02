@@ -5,6 +5,20 @@ let canClick=true;
 let numberStars;
 let isCorrect=false; 
 let isCounting=false;  
+const apiKey="G3W8GJRNbqbWGkFCS9Hd3c3iV4CtuQt8"; 
+
+
+//Userinput stuff
+let userObject= JSON.parse(localStorage.getItem("user")); 
+const {counter} = userObject; 
+const {favoriteAnimal} = userObject; 
+const {color} = userObject; 
+let giphyCount=1; 
+
+if (color !== null){
+    $("body").css("background-image", `url(images/Backdrop/${color.toLowerCase()}Backdrop.jpg)`); 
+}
+
 
 //abacus- ones 
 //Find a bead given a status- left, right, false
@@ -79,8 +93,6 @@ function decideSlideBead(beadSpot){
     }
 }
 
-
-
 //give clickListeners to beads at load
 function initialClickAssignments(){
     let counters= $(".counter"); 
@@ -105,7 +117,6 @@ function moveAllBeadsLeft(){
     function leftWaitTimer(){let timer= setInterval(function(){
         if (i>-1){
             let counter= $("#beadrow").find("#spot"+(i+3)).find(".counter");
-            console.log(counter); 
             animateBead((i+1), (i+3), counter); 
         }
        if (i<9 && i >-2){
@@ -154,7 +165,6 @@ function moveAllBeadsRight(){
         let timer= setInterval(function(){
             if (i<10){
                 let counter= $("#beadrow").find("#spot"+(i+3)).find(".counter");
-                console.log(counter); 
                 animateBead((i+3), (i+1), counter); 
             }
            if (i>0 && i <11){
@@ -177,7 +187,6 @@ function moveAllBeadsRight(){
 // show the bead count on the page
 function displayCount(){
     count= beadChecker("right", "right"); 
-    console.log(count); 
     if (isCounting){
         if (count === undefined){
             $("#count").text(0); 
@@ -197,7 +206,13 @@ function displayCount(){
 //randomly generate 1-10 stars
 function generateStars(){
     $(".star").empty(); 
-    let stars=  '<img class="countStar img-fluid" src="images/star.jpeg"></img>';
+    let stars= null; 
+    if (counter !== null){
+        stars=  `<img class="countStar img-fluid" src="images/${counter}.jpeg"></img>`;
+    } else{
+        stars=  `<img class="countStar img-fluid" src="images/Stars.jpeg"></img>`;
+    }
+    
     numberStars= Math.ceil(Math.random()*10); 
     let count=0; 
     while (count < numberStars){
@@ -220,15 +235,24 @@ function checkMyAnswer(){
         isCorrect=true; 
         collectStars();
         $("#gradeCorrect").find($("#gradeCorrectTitle")).text("Congratulations"); 
-        $("#gradeCorrect").find($(".modal-body")).html(" You are right!<br> <br>Good job."); 
-        answerSound("correct");
-        $("#gradeCorrect").find($(".results")).attr("id", "tryAgain");
-        $("#gradeCorrect").find($(".results")).text("Play Again!");
-        $("#gradeCorrect").find($(".results")).on("click", function(){
-            if (isCorrect){
-                generateStars();
-                moveAllBeadsLeft();
-            }
+        let giphyUrl= `https://api.giphy.com/v1/gifs/search?q=${favoriteAnimal}&api_key=${apiKey}&limit=1&offset=${giphyCount}&rating=g&lang=en`; 
+        let imgUrl=null; 
+        $.ajax({
+            url: giphyUrl,
+            method: "GET"
+        }).then(function(response){
+            giphyCount++; 
+            imgUrl= response.data[0].images.original.url;
+            $("#gradeCorrect").find($(".modal-body")).html(`You are right!<br> <img class="celebrate" src="${imgUrl}"> <br>Good job.`); 
+            answerSound("correct");
+            $("#gradeCorrect").find($(".results")).attr("id", "tryAgain");
+            $("#gradeCorrect").find($(".results")).text("Play Again!");
+            $("#gradeCorrect").find($(".results")).on("click", function(){
+                if (isCorrect){
+                    generateStars();
+                    moveAllBeadsLeft();
+                }
+            }); 
         });  
     } else {
         isCorrect=false; 
@@ -261,7 +285,6 @@ function answerSound(answer){
 function countAloud(number){
     if(isCounting){
         let audio = document.getElementById("audio"+number);
-        console.log(audio); 
         audio.play();
     }
 }

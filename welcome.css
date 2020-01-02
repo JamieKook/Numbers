@@ -1,0 +1,9 @@
+body {
+    background-image: url(images/Backdrop/rainbowBackdrop.jpg);
+    background-size: cover; 
+    background-repeat: no-repeat;
+}
+
+.container{
+    background-color: white; 
+}
