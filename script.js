@@ -19,7 +19,7 @@ if (favoriteAnimal === ""){
 }
 
 if (color !== null){
-    $("body").css("background-image", `url(../images/Backdrop/${color.toLowerCase()}Backdrop.jpg)`); 
+    $("body").css("background-image", `url(images/Backdrop/${color.toLowerCase()}Backdrop.jpg)`); 
 }
 
 
@@ -154,7 +154,7 @@ function animateBead(from, to, counter){
 function moveBeadHTML(from, to, status){
     $("#spot"+from).html(""); 
     $("#spot"+from).attr("data-counter", "false"); 
-    let beadImageHtml= `<img class="counter img-fluid" src="/images/counter.jpeg">`;
+    let beadImageHtml= `<img class="counter img-fluid" src="images/counter.jpeg">`;
     $("#spot"+to).html(beadImageHtml);
     $("#spot"+to).attr("data-counter", status);
     giveClickListenerToBeadCounters($("#spot"+to).find(".counter"));
@@ -215,9 +215,9 @@ function generateStars(){
     $(".star").empty(); 
     let stars= null; 
     if (counter !== null){
-        stars=  `<img class="countStar img-fluid" src="/images/${counter}.jpeg"></img>`;
+        stars=  `<img class="countStar img-fluid" src="images/${counter}.jpeg"></img>`;
     } else{
-        stars=  `<img class="countStar img-fluid" src="/images/Stars.jpeg"></img>`;
+        stars=  `<img class="countStar img-fluid" src="images/Stars.jpeg"></img>`;
     }
     
     numberStars= Math.ceil(Math.random()*10); 
