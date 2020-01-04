@@ -19,7 +19,7 @@ if (favoriteAnimal === ""){
 }
 
 if (color !== null){
-    $("body").css("background-image", `url(images/Backdrop/${color.toLowerCase()}Backdrop.jpg)`); 
+    $("body").css("background-image", `url(../images/Backdrop/${color.toLowerCase()}Backdrop.jpg)`); 
 }
 
 
@@ -84,6 +84,7 @@ function moveBead(direction) {
 
 // Decide if a bead can be slide and what direction to slide it
 function decideSlideBead(beadSpot){ 
+    debugger; 
     let x;
     spot = beadChecker("left", "left");
     if (beadSpot === spot && canClick){
@@ -153,7 +154,7 @@ function animateBead(from, to, counter){
 function moveBeadHTML(from, to, status){
     $("#spot"+from).html(""); 
     $("#spot"+from).attr("data-counter", "false"); 
-    let beadImageHtml= `<img class="counter img-fluid" src="images/counter.jpeg">`;
+    let beadImageHtml= `<img class="counter img-fluid" src="/images/counter.jpeg">`;
     $("#spot"+to).html(beadImageHtml);
     $("#spot"+to).attr("data-counter", status);
     giveClickListenerToBeadCounters($("#spot"+to).find(".counter"));
@@ -188,8 +189,12 @@ function moveAllBeadsRight(){
 }
 
 // show the bead count on the page
+//Also updates spot variable before check my answer
 function displayCount(){
     count= beadChecker("right", "right"); 
+    if (count === undefined){
+        spot=0; 
+    }
     if (isCounting){
         if (count === undefined){
             $("#count").text(0); 
@@ -201,7 +206,6 @@ function displayCount(){
     } else {
         $("#count").text(""); 
     }
-
 }
 
 //star game code 
@@ -211,9 +215,9 @@ function generateStars(){
     $(".star").empty(); 
     let stars= null; 
     if (counter !== null){
-        stars=  `<img class="countStar img-fluid" src="images/${counter}.jpeg"></img>`;
+        stars=  `<img class="countStar img-fluid" src="/images/${counter}.jpeg"></img>`;
     } else{
-        stars=  `<img class="countStar img-fluid" src="images/Stars.jpeg"></img>`;
+        stars=  `<img class="countStar img-fluid" src="/images/Stars.jpeg"></img>`;
     }
     
     numberStars= Math.ceil(Math.random()*10); 
@@ -234,6 +238,7 @@ function collectStars(){
 
 //check answer if it matches star number
 function checkMyAnswer(){
+    debugger; 
     if (numberStars === (spot)){
         isCorrect=true; 
         collectStars();
@@ -300,17 +305,6 @@ function turnOnOffCount(){
         isCounting=true; 
     }
 }; 
-
-// Future use
-// function generateRandomNum(){
-//     $(".star").empty(); 
-//     let numberEl=  $("<h1>"); 
-//     let number= Math.ceil(Math.random()*10); 
-//     let count=0; 
-//     numberEl.text(number); 
-//     numberEl.addClass("count"); 
-//     $(".star").append(numberEl); 
-// }
 
 //event listeners
 $("#slideLeft").on("click", moveAllBeadsLeft); 

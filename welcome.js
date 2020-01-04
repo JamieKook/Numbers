@@ -23,5 +23,5 @@ $(".submit").click(function(){
     userObject.color= color;
     userObject.counter= counter; 
     localStorage.setItem("user", JSON.stringify(userObject)); 
-    window.location.href = "count1to10.html"; 
+    window.location.href = "count1to10.html";  
 });

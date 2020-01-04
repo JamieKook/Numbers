@@ -5,6 +5,18 @@ An app to display numbers in different representations for children featuring ga
 
 ## Functionality 
 
+### Customization
+Before entering the game, users are asked to fill out a form which provides thier name, favorite animal, favorite color, and item that they want to count. The inputs are used to customize the game appearance based on user preferences. 
+
+#### Favorite Animal and Giphy
+The favorite animal input is used in an api call to Giphy. It provides a gif image of the animal when users solve the level. 
+
+#### Favorite Color
+The favorite color input is used to pick a background color for the webpage. 
+
+#### Counting Item
+The preference on counting item is used to pick which image appears on the screen for users to count.  
+
 ### Game Play
 This application works as a game to test children's ability to count from zero to ten. Instructions are available on click of the instruction button. When users click the "Check my answer" button, the game will determine whether they successfully counted the objects and represented it on the abacus. If they were successful, the counting stars will spin out of the screen and a new level will appear. Otherwise they will be allowed to try again on the current level. 
 
@@ -31,6 +43,8 @@ This appliation is designed to be used on any device!
 *   Bootstraps 4 is utilized for the styling and for media responsiveness as well as creating the modals.
 *   jQuery selects and mainpulates the DOM. 
 *   Animate.css is responsible for the animation of the counting stars when they disappear from the screen. 
+* Local storage stores form input
+* Giphy's API is called using AJAX and supplies a customized gif
 
 ## Meta 
 

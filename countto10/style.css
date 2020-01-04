@@ -4,13 +4,13 @@
 }
 
 body{
-    background-image: url(images/Backdrop/pinkBackdrop.jpg);
+    background-image: url(/images/Backdrop/pinkBackdrop.jpg);
     background-size: cover; 
     background-repeat: no-repeat;
 }
 
 .wood{
-    background-image: url(images/wood.jpg);
+    background-image: url(/images/wood.jpg);
     background-size: cover; 
     background-repeat: no-repeat;
     height: 95px; 
