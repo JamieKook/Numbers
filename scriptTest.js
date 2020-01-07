@@ -2,7 +2,7 @@ let beadCount=1;
 let isDoneFunction= false;
 let spot=null;  
 let canClick=true; 
-let numberStars;
+let number=null;
 let isCorrect=false; 
 let isCounting=false;  
 const apiKey="G3W8GJRNbqbWGkFCS9Hd3c3iV4CtuQt8"; 
@@ -83,7 +83,7 @@ function moveBead(direction) {
 }
 
 // Decide if a bead can be slide and what direction to slide it
-function decideSlideBead(beadSpot){ 
+function decideSlideBead(beadSpot){  
     let x;
     spot = beadChecker("left", "left");
     if (beadSpot === spot && canClick){
@@ -209,37 +209,18 @@ function displayCount(){
 
 //star game code 
 
-//randomly generate 1-10 stars
-function generateStars(){
-    $(".star").empty(); 
-    let stars= null; 
-    if (counter !== null){
-        stars=  `<img class="countStar img-fluid" src="images/${counter}.jpeg"></img>`;
-    } else{
-        stars=  `<img class="countStar img-fluid" src="images/Stars.jpeg"></img>`;
-    }
-    
-    numberStars= Math.ceil(Math.random()*10); 
+//randomly generate number 1-10
+function generateNumber(){
+    number= Math.ceil(Math.random()*10); 
     let count=0; 
-    while (count < numberStars){
-        let starEl=$(stars); 
-        $(".star").append(starEl); 
-        count++; 
-    }
+    $("#number").text(number); 
 }
 
-function collectStars(){
-    let stars= $(".countStar"); 
-    for (let i=0; i<stars.length; i++){
-        $(stars[i]).addClass("animated rotateOut"); 
-    }
-}; 
 
 //check answer if it matches star number
 function checkMyAnswer(){
-    if (numberStars === (spot)){
+    if (number === (spot)){
         isCorrect=true; 
-        collectStars();
         $("#gradeCorrect").find($("#gradeCorrectTitle")).text("Congratulations"); 
         let giphyUrl= `https://api.giphy.com/v1/gifs/search?q=${favoriteAnimal}&api_key=${apiKey}&limit=1&offset=${giphyCount}&rating=g&lang=en`; 
         let imgUrl=null; 
@@ -255,7 +236,7 @@ function checkMyAnswer(){
             $("#gradeCorrect").find($(".results")).text("Play Again!");
             $("#gradeCorrect").find($(".results")).on("click", function(){
                 if (isCorrect){
-                    generateStars();
+                    generateNumber();
                     moveAllBeadsLeft();
                 }
             }); 
@@ -318,5 +299,5 @@ $(".slider").on("click", function(){
 
 $("#instructions").hide(); 
 initialClickAssignments();
-generateStars(); 
+generateNumber(); 
 makeSoundFiles();  

@@ -7,3 +7,8 @@ body {
 .container{
     background-color: white; 
 }
+
+li {
+    font-size: 1rem; 
+    list-style: none;
+}

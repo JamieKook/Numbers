@@ -38,7 +38,7 @@ body{
     overflow: scroll; 
 }
 
-#count {
+#count, #number {
     font-size: 5rem; 
 }
 
