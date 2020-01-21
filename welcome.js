@@ -71,8 +71,10 @@ $(".submit").click(function(){
     generateIndex();
 });
 
+debugger; 
 userObject= JSON.parse(localStorage.getItem("user")); 
-if (userObject.name !== "" || userObject.name !== null) {
+
+if (userObject.name !== "" || userObject !== null) {
     generateIndex(); 
 } else {
     $(".index").hide(); 
