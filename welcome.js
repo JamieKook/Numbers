@@ -71,8 +71,18 @@ $(".submit").click(function(){
     generateIndex();
 });
 
-debugger; 
-userObject= JSON.parse(localStorage.getItem("user")); 
+function initializeLocalStorage(){
+    debugger; 
+    let user= localStorage.getItem("user"); 
+    if (user === null){
+        userObject = {}; 
+        restart(); 
+    } else {
+        userObject= JSON.parse(user); 
+    }
+}
+
+initializeLocalStorage(); 
 
 if (userObject.name !== "" || userObject !== null) {
     generateIndex(); 
