@@ -34,14 +34,12 @@ const generateIndex= ()=>{
         window.location.href = "test1to10.html";
     });  
     $("#preferences").on("click", function(){
-        console.log(event); 
         restart(); 
     });  
 
 }
 
 const restart= ()=>{
-    debugger;  
     $(".index").empty();
     $(".main").show(); 
     $(".submit").click(function(){
@@ -72,7 +70,6 @@ $(".submit").click(function(){
 });
 
 function initializeLocalStorage(){
-    debugger; 
     let user= localStorage.getItem("user"); 
     if (user === null){
         userObject = {}; 
@@ -84,7 +81,7 @@ function initializeLocalStorage(){
 
 initializeLocalStorage(); 
 
-if (userObject.name !== "" || userObject !== null) {
+if (userObject.name !== "") {
     generateIndex(); 
 } else {
     $(".index").hide(); 
